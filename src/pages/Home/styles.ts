@@ -56,3 +56,27 @@ export const Separator = styled.div`
   display: flex;
   justify-content: center;
 `
+
+export const StartCountdownButton = styled.button`
+  width: 100%;
+  padding: 1rem 2rem;
+
+  border: 0;
+  border-radius: 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.5rem;
+  font-weight: bold;
+
+  background: ${({ theme }) => theme['green-500']};
+  color: ${({ theme }) => theme['gray-100']};
+
+  transition: 0.2s;
+
+  &:hover {
+    background: ${({ theme }) => theme['green-700']};
+  }
+`

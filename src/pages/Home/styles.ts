@@ -31,6 +31,36 @@ export const FormContainer = styled.div`
   flex-wrap: wrap;
 `
 
+const BaseInput = styled.input`
+  background: transparent;
+  height: 2.5rem;
+
+  border: 0;
+  border-bottom: 2px solid ${({ theme }) => theme['gray-500']};
+  color: ${({ theme }) => theme['gray-100']};
+
+  font-size: 1.125rem;
+  font-weight: 500;
+  padding: 0 0.5rem;
+
+  &:focus {
+    box-shadow: none;
+    border-color: ${({ theme }) => theme['green-500']};
+  }
+
+  &::placeholder {
+    color: ${({ theme }) => theme['gray-500']};
+  }
+`
+
+export const TaskInput = styled(BaseInput)`
+  flex: 1;
+`
+
+export const MinutesAmountInput = styled(BaseInput)`
+  width: 4rem;
+`
+
 export const CountdownContainer = styled.div`
   font: 400 10rem 'Roboto Mono', monospace;
   line-height: 8rem;
@@ -76,7 +106,12 @@ export const StartCountdownButton = styled.button`
 
   transition: 0.2s;
 
-  &:hover {
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  &:not(:disabled):hover {
     background: ${({ theme }) => theme['green-700']};
   }
 `

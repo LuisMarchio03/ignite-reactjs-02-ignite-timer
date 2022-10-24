@@ -1,4 +1,4 @@
-import { HistoryContainer, HistoryList } from './styles'
+import { HistoryContainer, HistoryList, Status } from './styles'
 
 export function History() {
   return (
@@ -21,61 +21,36 @@ export function History() {
               <td>Estudar ReactJS</td>
               <td>60 minutos</td>
               <td>Há 2 Meses</td>
-              <td>Concluído</td>
+              <td>
+                <Status statusColor="green">Concluído</Status>
+              </td>
             </tr>
-            <tr>
-              <td>Estudar NextJS</td>
-              <td>60 minutos</td>
-              <td>25/04/2021</td>
-              <td>Andamento</td>
-            </tr>
+
             <tr>
               <td>Estudar ReactJS</td>
               <td>60 minutos</td>
               <td>Há 2 Meses</td>
-              <td>Concluído</td>
+              <td>
+                <Status statusColor="red">Interrompido</Status>
+              </td>
             </tr>
-            <tr>
-              <td>Estudar NextJS</td>
-              <td>60 minutos</td>
-              <td>25/04/2021</td>
-              <td>Andamento</td>
-            </tr>
+
             <tr>
               <td>Estudar ReactJS</td>
               <td>60 minutos</td>
               <td>Há 2 Meses</td>
-              <td>Concluído</td>
+              <td>
+                <Status statusColor="yellow">Em andamento</Status>
+              </td>
             </tr>
-            <tr>
-              <td>Estudar NextJS</td>
-              <td>60 minutos</td>
-              <td>25/04/2021</td>
-              <td>Andamento</td>
-            </tr>
+
             <tr>
               <td>Estudar ReactJS</td>
               <td>60 minutos</td>
               <td>Há 2 Meses</td>
-              <td>Concluído</td>
-            </tr>
-            <tr>
-              <td>Estudar NextJS</td>
-              <td>60 minutos</td>
-              <td>25/04/2021</td>
-              <td>Andamento</td>
-            </tr>
-            <tr>
-              <td>Estudar ReactJS</td>
-              <td>60 minutos</td>
-              <td>Há 2 Meses</td>
-              <td>Concluído</td>
-            </tr>
-            <tr>
-              <td>Estudar NextJS</td>
-              <td>60 minutos</td>
-              <td>25/04/2021</td>
-              <td>Andamento</td>
+              <td>
+                <Status statusColor="green">Concluído</Status>
+              </td>
             </tr>
           </tbody>
         </table>

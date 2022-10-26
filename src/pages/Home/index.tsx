@@ -24,7 +24,7 @@ const newCycleFormSchema = zod.object({
     .max(60, 'O ciclo precisa ser de no máximo 60 minutos.'),
 })
 
-type NewCycleFormData = zod.infebr<typeof newCycleFormSchema>
+type NewCycleFormData = zod.infer<typeof newCycleFormSchema>
 
 export function Home() {
   const { activeCycle, createNewCycle, interruptCurrentCycle } =
@@ -37,14 +37,19 @@ export function Home() {
       minutesAmount: 0,
     },
   })
-  const { handleSubmit, watch } = newCycleForm
+  const { handleSubmit, watch, reset } = newCycleForm
+
+  function handleCreateNewCycle(data: NewCycleFormData) {
+    createNewCycle(data)
+    reset()
+  }
 
   const task = watch('task')
   const isSubmitDisabled = !task
 
   return (
     <HomeContainer>
-      <form onSubmit={handleSubmit(createNewCycle)}>
+      <form onSubmit={handleSubmit(handleCreateNewCycle)}>
         <FormProvider {...newCycleForm}>
           <NewCycleForm />
         </FormProvider>

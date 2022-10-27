@@ -31,32 +31,57 @@ interface CyclesContextProviderProps {
   children: ReactNode
 }
 
+interface CycleState {
+  cycles: Cycle[]
+  activeCycleId: string | null
+}
+
 export function CyclesContextProvider({
   children,
 }: CyclesContextProviderProps) {
-  const [cycles, dispatch] = useReducer((state: Cycle[], action: any) => {
-    switch (action.type) {
-      case 'ADD_NEW_CYCLE': {
-        return [...state, action.payload.newCycle]
+  const [cyclesState, dispatch] = useReducer(
+    (state: CycleState, action: any) => {
+      switch (action.type) {
+        case 'ADD_NEW_CYCLE': {
+          return {
+            ...state,
+            cycles: [...state.cycles, action.payload.newCycle],
+            activeCycleId: action.payload.newCycle.id,
+          }
+        }
+
+        case 'MARK_CURRENT_CYCLE_AS_FINISHED': {
+          break
+        }
+
+        case 'INTERRUPT_CURRENT_CYCLE': {
+          return {
+            ...state,
+            cycles: state.cycles.map((cycle) => {
+              if (cycle.id === state.activeCycleId) {
+                return { ...cycle, interruptedDate: new Date() }
+              } else {
+                return cycle
+              }
+            }),
+            activeCycleId: null,
+          }
+        }
+
+        default:
       }
 
-      case 'MARK_CURRENT_CYCLE_AS_FINISHED': {
-        break
-      }
+      return state
+    },
+    {
+      cycles: [],
+      activeCycleId: null,
+    },
+  )
 
-      case 'INTERRUPT_CURRENT_CYCLE': {
-        break
-      }
-
-      default:
-    }
-
-    return state
-  }, [])
-
-  const [activeCycleId, setActiveCycleId] = useState<string | null>(null)
   const [amountSecondsPassed, setAmountSecondsPassed] = useState(0)
 
+  const { cycles, activeCycleId } = cyclesState
   const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId)
 
   function setSecondsPassed(seconds: number) {
@@ -99,7 +124,7 @@ export function CyclesContextProvider({
       },
     })
     // setCycles((state) => [...state, newCycle])
-    setActiveCycleId(newCycle.id)
+    // setActiveCycleId(newCycle.id)
     setAmountSecondsPassed(0)
   }
 
@@ -119,7 +144,7 @@ export function CyclesContextProvider({
     //     }
     //   }),
     // )
-    setActiveCycleId(null)
+    // setActiveCycleId(null)
   }
 
   return (

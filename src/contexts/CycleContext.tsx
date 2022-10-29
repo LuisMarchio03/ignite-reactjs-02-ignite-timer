@@ -51,7 +51,17 @@ export function CyclesContextProvider({
         }
 
         case 'MARK_CURRENT_CYCLE_AS_FINISHED': {
-          break
+          return {
+            ...state,
+            cycles: state.cycles.map((cycle) => {
+              if (cycle.id === state.activeCycleId) {
+                return { ...cycle, finishedDate: new Date() }
+              } else {
+                return cycle
+              }
+            }),
+            activeCycleId: null,
+          }
         }
 
         case 'INTERRUPT_CURRENT_CYCLE': {
@@ -89,16 +99,6 @@ export function CyclesContextProvider({
   }
 
   function markCurrentCycleAsFinished() {
-    // setCycles((state) =>
-    //   state.map((cycle) => {
-    //     if (cycle.id === activeCycleId) {
-    //       return { ...cycle, finishedDate: new Date() }
-    //     } else {
-    //       return cycle
-    //     }
-    //   }),
-    // )
-
     dispatch({
       type: 'MARK_CURRENT_CYCLE_AS_FINISHED',
       payload: {
@@ -123,8 +123,7 @@ export function CyclesContextProvider({
         newCycle,
       },
     })
-    // setCycles((state) => [...state, newCycle])
-    // setActiveCycleId(newCycle.id)
+
     setAmountSecondsPassed(0)
   }
 
@@ -135,16 +134,6 @@ export function CyclesContextProvider({
         activeCycleId,
       },
     })
-    // setCycles((state) =>
-    //   state.map((cycle) => {
-    //     if (cycle.id === activeCycleId) {
-    //       return { ...cycle, interruptedDate: new Date() }
-    //     } else {
-    //       return cycle
-    //     }
-    //   }),
-    // )
-    // setActiveCycleId(null)
   }
 
   return (

@@ -8,40 +8,19 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   :focus {
-    outline: 0;
-    box-shadow: 0 0 0 0.2rem ${({ theme }) => theme['green-500']};
+    outline: none;
+    box-shadow: 0 0 0 2px ${(props) => props.theme['green-500']};
   }
 
   body {
-    background: ${({ theme }) => theme['gray-900']};
-    color: ${({ theme }) => theme['gray-300']};
+    background: ${(props) => props.theme['gray-900']};
+    color: ${(props) => props.theme['gray-300']};
     -webkit-font-smoothing: antialiased;
   }
 
   body, input, textarea, button {
-    font: 400 1rem "Roboto", sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
   }
-
-  button {
-    cursor: pointer;
-  }
-
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  @media (max-width: 1080px) {
-    html {
-      font-size: 93.75%;
-    }
-  }
-
-  @media (max-width: 720px) {
-    html {
-      font-size: 87.5%;
-    }
-  }
-
-  
 `
